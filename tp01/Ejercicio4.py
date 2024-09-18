@@ -1,27 +1,3 @@
-"""def vuelto(total: int, recibido: int) -> list:
-    if total > recibido:
-        return -1
-    # Crea una lista de 7 elementos en cero
-    billetes = [0] * 7 # queda [0, 0, 0, 0, 0, 0, 0]
-    # Calcula lo que debe devolver
-    devolver = recibido - total
-    for v in range(len(valores)):
-        billetes[v] = devolver // valores[v]
-        devolver %= valores[v]
-    return billetes
-
-valores = [500, 100, 50, 20, 10, 5, 1]
-pago = 317
-billete = 500
-if pago > billete:
-    print('No alcanza para hacer el pago')
-else:
-    salida = vuelto(pago, billete)
-    # Uso de enumerate para las listas
-    for i, s in enumerate(salida): # ver enumerate
-        if s:
-            print(f'{s} billetes de {valores[i]}')"""
-
 def calcular_vuelto(total_compra, dinero_recibido):
   """Calcula el cambio a entregar minimizando la cantidad de billetes.
 
@@ -53,7 +29,7 @@ def calcular_vuelto(total_compra, dinero_recibido):
 
   return vuelto
 
-# Ejemplo de uso
+
 total_compra = 3170
 dinero_recibido = 5000
 
