@@ -39,4 +39,8 @@ if vuelto:
   print("Entregar el siguiente cambio:")
   for i, cantidad in enumerate(vuelto):
     if cantidad > 0:
+<<<<<<< HEAD
       print(f"{cantidad} billete(s) de $ {billetes[i]} ")
+=======
+      print(f"{cantidad} billete(s) de $ {billetes[i]} ")
+>>>>>>> e0c620c7802f1b2dcb0f521215b616c3bbe8b189
