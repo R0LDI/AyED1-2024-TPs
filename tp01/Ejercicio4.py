@@ -27,16 +27,16 @@ def calcular_vuelto(total_compra, dinero_recibido):
     print("Error: No es posible entregar el cambio exacto con los billetes disponibles.")
     return None
 
-  return vuelto
+  return vuelto, billetes
 
 
 total_compra = 3170
 dinero_recibido = 5000
 
-vuelto = calcular_vuelto(total_compra, dinero_recibido)
+vuelto, billetes = calcular_vuelto(total_compra, dinero_recibido)
 
 if vuelto:
   print("Entregar el siguiente cambio:")
   for i, cantidad in enumerate(vuelto):
     if cantidad > 0:
-      print(f"{cantidad} billete(s) de ${billetes[i]}")
+      print(f"{cantidad} billete(s) de $ {billetes[i]} ")
