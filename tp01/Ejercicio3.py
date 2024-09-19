@@ -32,4 +32,4 @@ def main():
   print(f"El gasto total en viajes es: {gasto_total}")
 
 if __name__ == "__main__":
-  main()
+  main() 
