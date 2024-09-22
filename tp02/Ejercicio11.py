@@ -38,6 +38,7 @@ def buscar_paciente(pacientes: List[dict]) -> None:
         if turno_count > 0:
             print(f'fue atendido {turno_count} veces con turnos')
         if urgencia_count == 0 and turno_count == 0:
+        
             print('no fue nunca atendido')
 
 def main() -> None:
