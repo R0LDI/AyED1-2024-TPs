@@ -1,5 +1,4 @@
 def cargar(n):
-    """Carga una matriz de NxN con números enteros ingresados por el usuario."""
     matriz = []
     for i in range(n):
         fila = []
