@@ -1,0 +1,17 @@
+def imprimir_numeros():
+    try:
+        for i in range(1, 100001):
+            print(i)
+    except KeyboardInterrupt:
+        respuesta = input("¿Desea detener el programa? (s/n): ").lower()
+        if respuesta == 's':
+            print("Programa detenido por el usuario.")
+            return
+        else:
+            imprimir_numeros()
+
+def main():
+    imprimir_numeros()
+
+if __name__ == "__main__":
+    main()

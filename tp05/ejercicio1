@@ -1,0 +1,16 @@
+def ingresar_numero_natural():
+    while True:
+        try:
+            num = int(input("Ingrese un número natural: "))
+            if num <= 0:
+                raise ValueError("El número debe ser mayor que 0.")
+            return num
+        except ValueError as e:
+            print(f"Error: {e}")
+
+def main():
+    numero = ingresar_numero_natural()
+    print(f"Número ingresado correctamente: {numero}")
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,21 @@
+def eliminar_comentarios(archivo_origen, archivo_destino):
+    try:
+        with open(archivo_origen, "r") as archivo_entrada, open(archivo_destino, "w") as archivo_salida:
+            for linea in archivo_entrada:
+                if "#" in linea:
+                    sin_comentario = linea.split("#")[0].rstrip()
+                    archivo_salida.write(sin_comentario + "\n" if sin_comentario else "")
+                else:
+                    archivo_salida.write(linea)
+    except FileNotFoundError:
+        print("Archivo de origen no encontrado.")
+    except Exception as e:
+        print(f"Error inesperado: {e}")
+
+def main():
+    archivo = input("Ingrese el archivo de Python a limpiar: ")
+    eliminar_comentarios(archivo, "limpio.py")
+    print("Archivo limpio generado: limpio.py")
+
+if __name__ == "__main__":
+    main()

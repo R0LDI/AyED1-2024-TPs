@@ -1,0 +1,32 @@
+def dividir_archivo(nombre_archivo, tamano_max):
+    try:
+        with open(nombre_archivo, "r") as archivo:
+            parte = 1
+            actual = []
+            tamano_actual = 0
+            for linea in archivo:
+                if tamano_actual + len(linea) <= tamano_max:
+                    actual.append(linea)
+                    tamano_actual += len(linea)
+                else:
+                    with open(f"{nombre_archivo}_parte{parte}.txt", "w") as salida:
+                        salida.writelines(actual)
+                    parte += 1
+                    actual = [linea]
+                    tamano_actual = len(linea)
+            if actual:
+                with open(f"{nombre_archivo}_parte{parte}.txt", "w") as salida:
+                    salida.writelines(actual)
+    except FileNotFoundError:
+        print("Error: Archivo no encontrado.")
+    except Exception as e:
+        print(f"Error inesperado: {e}")
+
+def main():
+    archivo = input("Ingrese el nombre del archivo a dividir: ")
+    tamano = int(input("Ingrese el tamaño máximo de cada parte (en bytes): "))
+    dividir_archivo(archivo, tamano)
+    print("Archivo dividido en partes.")
+
+if __name__ == "__main__":
+    main()

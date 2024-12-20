@@ -1,0 +1,22 @@
+def obtener_mes(numero):
+    meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+             "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
+    try:
+        if not (1 <= numero <= 12):
+            raise ValueError("Número de mes inválido.")
+        return meses[numero - 1]
+    except ValueError as e:
+        print(f"Error: {e}")
+        return ""
+
+def main():
+    try:
+        numero = int(input("Ingrese un número de mes (1-12): "))
+        mes = obtener_mes(numero)
+        if mes:
+            print(f"El mes es: {mes}")
+    except ValueError:
+        print("Debe ingresar un número entero.")
+
+if __name__ == "__main__":
+    main()

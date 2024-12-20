@@ -9,7 +9,7 @@ def eliminar_subcadena(c, inicio, longitud):
     return salida
 
 def main():
-    cadena = "El número de teléfono es 4356-7890"
+    cadena = "El número de teléfono es 5356-8490"
     inicio = 25
     longitud = 9
     print("Eliminar subcadena que comienza en la posición", inicio, "y tiene", longitud, "caracteres")

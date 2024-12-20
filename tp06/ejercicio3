@@ -1,0 +1,99 @@
+def grabar_alturas(archivo: str) -> None:
+
+    with open(archivo, 'w', encoding='utf-8') as f:
+        while True:
+            deporte = input("Ingrese el nombre del deporte (o 'fin' para terminar): ")
+            if deporte.lower() == 'fin':
+                break
+            f.write(f"{deporte}\n")
+            while True:
+                altura = input(f"Ingrese la altura del atleta en cm (o 'fin' para terminar): ")
+                if altura.lower() == 'fin':
+                    break
+                try:
+                    altura = float(altura)
+                    if altura > 0:
+                        f.write(f"{altura}\n")
+                    else:
+                        print("La altura debe ser un número positivo.")
+                except ValueError:
+                    print("Ingrese una altura válida.")
+
+def grabar_promedio(archivo_alturas: str, archivo_promedios: str) -> None:
+   
+    try:
+        with open(archivo_alturas, 'r', encoding='utf-8') as f:
+            lineas = f.readlines()
+        
+        promedios = {}
+        deporte_actual = ""
+        alturas = []
+
+        for linea in lineas:
+            linea = linea.strip()
+            if linea.replace('.', '', 1).isdigit():  
+                alturas.append(float(linea))
+            else:  
+                if deporte_actual and alturas:  
+                    promedio = sum(alturas) / len(alturas)
+                    promedios[deporte_actual] = promedio
+                deporte_actual = linea
+                alturas = []
+        
+        # Guardar el último deporte
+        if deporte_actual and alturas:
+            promedio = sum(alturas) / len(alturas)
+            promedios[deporte_actual] = promedio
+
+        
+        with open(archivo_promedios, 'w', encoding='utf-8') as f:
+            for deporte, promedio in promedios.items():
+                f.write(f"{deporte}\n{promedio:.2f}\n")
+
+    except FileNotFoundError:
+        print(f"Error: No se encontró el archivo {archivo_alturas}.")
+    except Exception as e:
+        print(f"Error inesperado: {str(e)}")
+
+def mostrar_mas_altos(archivo_promedios: str) -> None:
+
+    try:
+        with open(archivo_promedios, 'r', encoding='utf-8') as f:
+            lineas = f.readlines()
+        
+        promedios = {}
+        total_alturas = 0
+        total_deportes = 0
+
+        for i in range(0, len(lineas), 2):
+            deporte = lineas[i].strip()
+            promedio = float(lineas[i + 1].strip())
+            promedios[deporte] = promedio
+            total_alturas += promedio
+            total_deportes += 1
+
+        if total_deportes > 0:
+            promedio_general = total_alturas / total_deportes
+            print(f"Promedio general de alturas: {promedio_general:.2f}")
+            print("Disciplinas de los atletas q superan la altura promedio general:")
+            for deporte, promedio in promedios.items():
+                if promedio > promedio_general:
+                    print(deporte)
+        else:
+            print("No hay datos suficientes para calcular el promedio general.")
+    except FileNotFoundError:
+        print(f"Error: No se encontró el archivo {archivo_promedios}.")
+    except Exception as e:
+        print(f"Error inesperado: {str(e)}")
+
+def main() -> None:
+
+    archivo_alturas = "alturas_atletas.txt"
+    archivo_promedios = "promedios_alturas.txt"
+
+    grabar_alturas(archivo_alturas)
+    grabar_promedio(archivo_alturas, archivo_promedios)
+    mostrar_mas_altos(archivo_promedios)
+
+if __name__ == "__main__":
+    main()

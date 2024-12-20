@@ -1,0 +1,59 @@
+import os
+
+def procesar_archivo(archivo_origen: str, archivo_destino: str, formato: int) -> None:
+ 
+    if not os.path.exists(archivo_origen):
+        print(f"Error: El archivo {archivo_origen} no existe.")
+        return
+
+    try:
+        with open(archivo_origen, 'r', encoding='utf-8') as archivo_entrada, \
+             open(archivo_destino, 'w', encoding='utf-8') as archivo_salida:
+             
+            # Escribir la cabecera del archivo CSV
+            archivo_salida.write("Apellido y Nombre,Fecha,Dirección\n")
+            
+            for linea in archivo_entrada:
+                if formato == 1:
+                    # Procesar formato 1
+                    apellido_nombre = linea[0:20].strip()
+                    fecha = linea[20:28].strip()
+                    direccion = linea[28:].strip()
+                    archivo_salida.write(f"{apellido_nombre},{fecha},{direccion}\n")
+                
+                elif formato == 2:
+                    # Procesar formato 2
+                    datos = []
+                    i = 0
+                    while i < len(linea):
+                        # Leer la longitud del campo (primeros 2 caracteres)
+                        longitud_campo = int(linea[i:i+2])
+                        i += 2
+                        # Extraer el campo según la longitud indicada
+                        datos.append(linea[i:i+longitud_campo].strip())
+                        i += longitud_campo
+
+                    # Verificar que existan al menos 3 campos para formar la línea CSV
+                    if len(datos) >= 3:
+                        apellido_nombre = datos[0]
+                        fecha = datos[1]
+                        direccion = " ".join(datos[2:])
+                        archivo_salida.write(f"{apellido_nombre},{fecha},{direccion}\n")
+
+        print(f"Archivo convertido a formato CSV: {archivo_destino}")
+    except Exception as e:
+        print(f"Error inesperado: {str(e)}")
+
+def main():
+    # Procesar el archivo de formato 1
+    archivo_origen1 = "empleados_formato1.txt"
+    archivo_destino1 = "empleados_formato1.csv"
+    procesar_archivo(archivo_origen1, archivo_destino1, formato=1)
+    
+    # Procesar el archivo de formato 2
+    archivo_origen2 = "empleados_formato2.txt"
+    archivo_destino2 = "empleados_formato2.csv"
+    procesar_archivo(archivo_origen2, archivo_destino2, formato=2)
+
+if __name__ == "__main__":
+    main()

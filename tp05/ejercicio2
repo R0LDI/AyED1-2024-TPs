@@ -1,0 +1,19 @@
+def sumar_cadenas(cad1, cad2):
+    try:
+        num1 = float(cad1)
+        num2 = float(cad2)
+        return num1 + num2
+    except ValueError:
+        return -1
+
+def main():
+    cad1 = input("Ingrese el primer número (cadena): ")
+    cad2 = input("Ingrese el segundo número (cadena): ")
+    resultado = sumar_cadenas(cad1, cad2)
+    if resultado == -1:
+        print("Error: Una de las cadenas no contiene un número válido.")
+    else:
+        print(f"La suma es: {resultado}")
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,16 @@
+import math
+
+def calcular_raiz():
+    try:
+        numero = float(input("Ingrese un número: "))
+        if numero < 0:
+            raise ValueError("No se puede calcular la raíz cuadrada de un número negativo.")
+        print(f"La raíz cuadrada de {numero} es: {math.sqrt(numero)}")
+    except ValueError as e:
+        print(f"Error: {e}")
+
+def main():
+    calcular_raiz()
+
+if __name__ == "__main__":
+    main()

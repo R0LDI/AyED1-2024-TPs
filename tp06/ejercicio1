@@ -1,0 +1,62 @@
+def procesar_archivo_nombres(nombre_archivo: str) -> None:
+  
+    try:
+        
+        with open(nombre_archivo, 'r', encoding='utf-8') as archivo:
+            nombres = archivo.readlines()
+            
+       
+        open('ARMENIA.TXT', 'w', encoding='utf-8').close()
+        open('ITALIA.TXT', 'w', encoding='utf-8').close()
+        open('ESPAÑA.TXT', 'w', encoding='utf-8').close()
+        
+       
+        for nombre in nombres:
+            nombre = nombre.strip()  # Eliminar espacios extra
+            if nombre and ',' in nombre:  # Verificar formato correcto
+                apellido = nombre.split(',')[0].strip()
+                
+                
+                if apellido.upper().endswith('IAN'):
+                    with open('ARMENIA.TXT', 'a', encoding='utf-8') as f:
+                        f.write(nombre + '\n')
+                elif apellido.upper().endswith('INI'):
+                    with open('ITALIA.TXT', 'a', encoding='utf-8') as f:
+                        f.write(nombre + '\n')
+                elif apellido.upper().endswith('EZ'):
+                    with open('ESPAÑA.TXT', 'a', encoding='utf-8') as f:
+                        f.write(nombre + '\n')
+                        
+    except FileNotFoundError:
+        print(f"Error: No se encontró el archivo {nombre_archivo}")
+    except Exception as e:
+        print(f"Error inesperado: {str(e)}")
+
+def main() -> None:
+    """Función principal del programa"""
+    try:
+       
+        nombre_archivo = input("Ingrese el nombre del archivo a procesar (ej. apellidos.txt): ")
+        procesar_archivo_nombres(nombre_archivo)
+        
+       
+        print("\nProcesamiento completado. Contenido de los archivos generados:")
+        
+        archivos = ['ARMENIA.TXT', 'ITALIA.TXT', 'ESPAÑA.TXT']
+        for archivo in archivos:
+            print(f"\nContenido de {archivo}:")
+            try:
+                with open(archivo, 'r', encoding='utf-8') as f:
+                    contenido = f.read().strip()
+                    if contenido:
+                        print(contenido)
+                    else:
+                        print("(Archivo vacío)")
+            except FileNotFoundError:
+                print(f"No se pudo leer el archivo {archivo}")
+                
+    except Exception as e:
+        print(f"Error en el programa: {str(e)}")
+
+if __name__ == "__main__":
+    main()
